@@ -20,4 +20,8 @@ export class VehiculoService {
       return this.http.put(`${this.url}/editar`, vehiculo);
   }
 
+  public listarV(){
+    return this.http.get<Vehiculo[]>(`${this.url}/listar`);
+  }
+
 }
