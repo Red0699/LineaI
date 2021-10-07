@@ -13,17 +13,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VehiculoComponent implements OnInit {
 
-  @ViewChild("VehiculoPaginator") paginator: MatPaginator;
+  page: number = 0;
+  size: number = 5;
 
-  displayedColumns: String[] = ['idVehiculo','placa','modelo','marca','tipoVehiculo','capacidad']
+
+
+  displayedColumns: String[] = ['placa', 'modelo', 'marca', 'tipoVehiculo', 'capacidad']
   dataSource = new MatTableDataSource<Vehiculo>();
   constructor(private vehiculoService: VehiculoService,
-              public route: ActivatedRoute,
-              private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    public route: ActivatedRoute) { }
 
-  
+
 
   ngOnInit(): void {
+
+    this.listarVeh();
 
     /*let vehiculo: Vehiculo = new Vehiculo();
     vehiculo.idVehiculo = 5;
@@ -32,29 +37,40 @@ export class VehiculoComponent implements OnInit {
     vehiculo.marca = "Ford";
     vehiculo.tipoVehiuclo = "Carga";
     vehiculo.capacidad = "50Kg"; */
-    
-    this.vehiculoService.listarV().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    })
+
+
 
     /*this.vehiculoService.guardar(vehiculo).subscribe(data =>{
         console.log("Se registro vehiculo");
     });*/
-/*
-     this.vehiculoService.editar(vehiculo).subscribe(data =>{
-        console.log("Vehiculo editado correctamente");
-      }, err => {
-        if(err.error.status == 500) {
-          this.openSnackBar("Error inesperado, comuniquese con el administrador");
-        } else{
-          this.openSnackBar(err.error.message);
-        }
-        
-      });
-*/
+    /*
+         this.vehiculoService.editar(vehiculo).subscribe(data =>{
+            console.log("Vehiculo editado correctamente");
+          }, err => {
+            if(err.error.status == 500) {
+              this.openSnackBar("Error inesperado, comuniquese con el administrador");
+            } else{
+              this.openSnackBar(err.error.message);
+            }
+            
+          });
+    */
 
   }
+
+  listarVeh() {
+    this.vehiculoService.listarV(this.page, this.size).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data.content);
+    });
+  }
+
+  cambiarPag(e: any) {
+    this.page = e.page
+    this.size = e.size;
+    this.listarVeh();
+  }
+
+
 
   private openSnackBar(mensaje: string) {
     this.snackBar.open(mensaje, 'Información', {
@@ -63,5 +79,7 @@ export class VehiculoComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
+
+
 
 }
