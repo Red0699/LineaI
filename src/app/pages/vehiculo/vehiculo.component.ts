@@ -13,13 +13,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VehiculoComponent implements OnInit {
 
-  page: number = 0;
-  size: number = 5;
+  pageIndex: number = 0;
+  pageSize: number = 5;
+  lengthPage: number;
 
-
+  
 
   displayedColumns: String[] = ['placa', 'modelo', 'marca', 'tipoVehiculo', 'capacidad']
   dataSource = new MatTableDataSource<Vehiculo>();
+  
   constructor(private vehiculoService: VehiculoService,
     private snackBar: MatSnackBar,
     public route: ActivatedRoute) { }
@@ -58,19 +60,22 @@ export class VehiculoComponent implements OnInit {
 
   }
 
-  listarVeh() {
-    this.vehiculoService.listarV(this.page, this.size).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data.content);
-    });
-  }
 
-  cambiarPag(e: any) {
-    this.page = e.page
-    this.size = e.size;
+  cambiarPag(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    console.log("Pagina: "+this.pageIndex);
+    console.log("Size: "+this.pageSize);
     this.listarVeh();
   }
 
-
+  listarVeh() {
+    this.vehiculoService.listarV(this.pageIndex, this.pageSize).subscribe(data => {
+      this.lengthPage = data.totalElements;
+      this.dataSource = new MatTableDataSource(data.content);
+      
+    });
+  }
 
   private openSnackBar(mensaje: string) {
     this.snackBar.open(mensaje, 'Información', {

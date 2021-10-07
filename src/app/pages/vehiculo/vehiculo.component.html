@@ -39,7 +39,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSize]="size" [pageSizeOptions]="[5, 10, 25, 100]" (page)="cambiarPag($event)"></mat-paginator> 
+    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" [length]="lengthPage" (page)="cambiarPag($event)" ></mat-paginator> 
 </div>
 
 <router-outlet></router-outlet>
