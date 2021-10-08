@@ -20,7 +20,7 @@ export class VehiculoComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: String[] = ['placa', 'modelo', 'marca', 'tipoVehiculo', 'capacidad']
+  displayedColumns: String[] = ['placa', 'modelo', 'marca', 'tipoVehiculo', 'capacidad','ver']
   dataSource = new MatTableDataSource<Vehiculo>();
   
   constructor(private vehiculoService: VehiculoService,

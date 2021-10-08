@@ -1,1 +1,42 @@
-<p>agregar-vehiculo works!</p>
+<div class="crea">
+    <form [formGroup]="Vehform" #formVehiculo="ngForm" (ngSubmit)="guardar()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Placa</mat-label>
+            <input class="controls" matInput placeholder="Placa" formControlName="placa" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Modelo</mat-label>
+            <input class="controls" matInput placeholder="Modelo" formControlName="modelo" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="marca" [(ngModel)]="selectedItem">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let pos of positions" [value]="pos.value">
+                {{pos.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo Vehiculo</mat-label>
+            <input class="controls" matInput placeholder="Tipo Vehiculo" formControlName="tipoVehiuclo" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Capacidad</mat-label>
+            <input class="controls" matInput placeholder="Capacidad" formControlName="capacidad" />
+        </mat-form-field>
+
+        <button mat-fab color="accent" style="float: right" type="submit" [disabled]="formVehiculo.invalid">
+            <mat-icon>save</mat-icon>
+        </button>
+
+        <button mat-fab color="accent" style="float: right" [routerLink]="['/vehiculo']">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </form>
+
+</div>
