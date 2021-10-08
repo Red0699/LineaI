@@ -14,13 +14,27 @@ export class AgregarVehiculoComponent implements OnInit {
   private idVehiculo: number;
 
   selectedItem : string;
+  selectedItemTV : string;
   positions = [
     {value: 'Ford' },
     {value: 'Chevrolet'},
-    {value: 'Toyota'}
+    {value: 'Toyota'},
+    {value: 'Mazda'},
+    {value: 'Renault'},
+    {value: 'Audi'},
+    {value: 'BMW'},
+    {value: 'Honda'},
+    {value: 'Jeep'},
+    {value: 'Nissan'},
+    {value: 'Suzuki'}
   ];
 
-  
+  tipoVeh = [
+    {tipo: 'Deportivo'},
+    {tipo: 'Camioneta'},
+    {tipo: 'Automovil'},
+    {tipo: 'Campero'}
+  ]
 
   Vehform = this.fb.group({
     placa: ['', Validators.required],

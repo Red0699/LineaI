@@ -13,16 +13,21 @@
         <mat-form-field class="example-full-width">
             <mat-label>Marca</mat-label>
             <mat-select formControlName="marca" [(ngModel)]="selectedItem">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let pos of positions" [value]="pos.value">
-                {{pos.value}}
-              </mat-option>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let pos of positions" [value]="pos.value">
+                    {{pos.value}}
+                </mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-label>Tipo Vehiculo</mat-label>
-            <input class="controls" matInput placeholder="Tipo Vehiculo" formControlName="tipoVehiuclo" />
+            <mat-label>Tipo de Vehiculo</mat-label>
+            <mat-select formControlName="tipoVehiuclo" [(ngModel)]="selectedItemTV">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let tip of tipoVeh" [value]="tip.tipo">
+                    {{tip.tipo}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
