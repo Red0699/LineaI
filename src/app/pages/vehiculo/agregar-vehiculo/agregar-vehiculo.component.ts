@@ -12,6 +12,7 @@ import { Vehiculo } from 'src/app/_model/Vehiculo';
 export class AgregarVehiculoComponent implements OnInit {
 
   private idVehiculo: number;
+  private edicion : boolean;
 
   selectedItem : string;
   selectedItemTV : string;
@@ -48,21 +49,26 @@ export class AgregarVehiculoComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-
+    this.iniciarFormulario();
   }
 
-  iniciarVacio(){
+  iniciarFormulario(){
     this.Vehform = new FormGroup({
       'placa': new FormControl('', [Validators.required]),
-      'modelo': new FormControl(0, [Validators.required]),
+      'modelo': new FormControl(null, [Validators.required]),
       'marca': new FormControl('', [Validators.required]),
       'tipoVehiuclo': new FormControl('', [Validators.required]),
       'capacidad': new FormControl('', [Validators.required]),
     });
   }
 
-  cargarData(){
+  cargar(){
     this.serviceAgregarVehiculo.listarIdVeh(this.idVehiculo).subscribe(data => {
+      this.Vehform.get('placa').setValue(data.placa);
+      this.Vehform.get('modelo').setValue(data.modelo);
+      this.Vehform.get('marca').setValue(data.marca);
+      this.Vehform.get('tipoVehiuclo').setValue(data.tipoVehiuclo);
+      this.Vehform.get('capacidad').setValue(data.capacidad);
     });
   }
 
@@ -79,6 +85,9 @@ export class AgregarVehiculoComponent implements OnInit {
       this.Vehform.reset();
       this.router.navigate(['/vehiculo']);
     });
+  }
 
+  get modelo() {
+    return this.Vehform.get('modelo');
   }
 }

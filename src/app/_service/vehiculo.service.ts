@@ -24,4 +24,9 @@ export class VehiculoService {
     return this.http.get<any>(`${this.url}/pageable?page=${page}&size=${size}`);
   }
 
+  listarIdVeh(id: number){
+    return this.http.get<Vehiculo>(`${this.url}/listar/${id}`);
+  }
+
+
 }
