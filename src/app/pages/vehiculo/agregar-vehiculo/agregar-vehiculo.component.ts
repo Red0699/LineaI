@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VehiculoService } from './../../../_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 
@@ -46,16 +46,31 @@ export class AgregarVehiculoComponent implements OnInit {
   });
   constructor(private serviceAgregarVehiculo: VehiculoService,
     private fb: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.iniciarFormulario();
+    this.route.params.subscribe((params: Params) => {
+      this.idVehiculo = params['idVehiculo'];
+      // si llega el id edicion es verdadera
+      this.edicion = params['idVehiculo'] != null;
+    });
+
+    // Se comprueba el estado de edicion
+    this.formularioVacio();
+    if (this.edicion === true) {
+      this.cargar(); //Se carga la data
+    }
   }
 
-  iniciarFormulario(){
+  formularioVacio(){
     this.Vehform = new FormGroup({
       'placa': new FormControl('', [Validators.required]),
-      'modelo': new FormControl(null, [Validators.required]),
+      'modelo': new FormControl(null, [
+        Validators.required,
+        Validators.min(1900),
+        Validators.max(2022)
+      ]),
       'marca': new FormControl('', [Validators.required]),
       'tipoVehiuclo': new FormControl('', [Validators.required]),
       'capacidad': new FormControl('', [Validators.required]),
@@ -80,14 +95,30 @@ export class AgregarVehiculoComponent implements OnInit {
     vehiculo.tipoVehiuclo = this.Vehform.value['tipoVehiuclo'];
     vehiculo.capacidad = this.Vehform.value['capacidad'];
 
-    // metodo de guardar
-    this.serviceAgregarVehiculo.guardar(vehiculo).subscribe(() => {
-      this.Vehform.reset();
-      this.router.navigate(['/vehiculo']);
-    });
+    if (this.edicion === true) {
+      vehiculo.idVehiculo = this.idVehiculo;
+      this.serviceAgregarVehiculo.editar(vehiculo).subscribe(() => {
+        this.Vehform.reset();
+        this.router.navigate(['/vehiculo']);
+      });
+    } else {
+      // metodo de guardar
+      this.serviceAgregarVehiculo.guardar(vehiculo).subscribe(() => {
+        this.Vehform.reset();
+        this.router.navigate(['/vehiculo']);
+      });
+    }
   }
 
   get modelo() {
     return this.Vehform.get('modelo');
+  }
+
+  get placa() {
+    return this.Vehform.get('placa');
+  }
+
+  get capacidad() {
+    return this.Vehform.get('capacidad');
   }
 }

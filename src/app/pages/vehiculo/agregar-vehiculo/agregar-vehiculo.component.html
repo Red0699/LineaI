@@ -2,12 +2,13 @@
     <form [formGroup]="Vehform" #formVehiculo="ngForm" (ngSubmit)="guardar()">
         <mat-form-field class="example-full-width">
             <mat-label>Placa</mat-label>
-            <input matInput placeholder="Placa" formControlName="placa" />
+            <input matInput placeholder="Placa" formControlName="placa" maxlength="8"/>
+            <mat-error *ngIf="placa.invalid && placa.errors.required" placeholder="Placa">Placa requerida</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-label>Modelo</mat-label>
-            <input matInput placeholder="Modelo" formControlName="modelo" />
+            <input matInput placeholder="Modelo" formControlName="modelo" type="number"/>
             <mat-error *ngIf="modelo.invalid && modelo.errors.required">Modelo requerido</mat-error>
             <mat-error *ngIf="modelo.invalid && modelo.errors.min">debe ser mayor a 1900</mat-error>
             <mat-error *ngIf="modelo.invalid && modelo.errors.max">debe ser menor a 2022</mat-error>
@@ -35,7 +36,8 @@
 
         <mat-form-field class="example-full-width">
             <mat-label>Capacidad</mat-label>
-            <input matInput placeholder="Capacidad" formControlName="capacidad" />
+            <input matInput placeholder="Capacidad" formControlName="capacidad" maxlength="10" />
+            <mat-error *ngIf="capacidad.invalid && capacidad.errors.required">Capacidad requerida</mat-error>
         </mat-form-field>
 
         <button mat-fab color="accent" style="float: right" type="submit" [disabled]="formVehiculo.invalid">
