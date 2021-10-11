@@ -10,8 +10,8 @@
             <mat-label>Modelo</mat-label>
             <input matInput placeholder="Modelo" formControlName="modelo" type="number"/>
             <mat-error *ngIf="modelo.invalid && modelo.errors.required">Modelo requerido</mat-error>
-            <mat-error *ngIf="modelo.invalid && modelo.errors.min">debe ser mayor a 1900</mat-error>
-            <mat-error *ngIf="modelo.invalid && modelo.errors.max">debe ser menor a 2022</mat-error>
+            <mat-error *ngIf="modelo.invalid && modelo.errors.min">Debe ser mayor a 1900</mat-error>
+            <mat-error *ngIf="modelo.invalid && modelo.errors.max">Debe ser menor a 2022</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -22,6 +22,7 @@
                     {{pos.value}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="marca.invalid && marca.errors.required">Debe seleccionar una opcion</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -32,6 +33,7 @@
                     {{tip.tipo}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="tipoVehiuclo.invalid && tipoVehiuclo.errors.required">Debe seleccionar una opcion</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">

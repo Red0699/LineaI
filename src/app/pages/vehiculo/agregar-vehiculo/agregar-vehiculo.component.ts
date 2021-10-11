@@ -96,6 +96,7 @@ export class AgregarVehiculoComponent implements OnInit {
     vehiculo.capacidad = this.Vehform.value['capacidad'];
 
     if (this.edicion === true) {
+      //metodo para editar
       vehiculo.idVehiculo = this.idVehiculo;
       this.serviceAgregarVehiculo.editar(vehiculo).subscribe(() => {
         this.Vehform.reset();
@@ -120,5 +121,13 @@ export class AgregarVehiculoComponent implements OnInit {
 
   get capacidad() {
     return this.Vehform.get('capacidad');
+  }
+
+  get tipoVehiuclo(){
+    return this.Vehform.get('tipoVehiuclo');
+  }
+
+  get marca(){
+    return this.Vehform.get('marca');
   }
 }
