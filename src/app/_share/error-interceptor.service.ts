@@ -32,8 +32,8 @@ export class ErrorInterceptorService implements HttpInterceptor {
           this.barraDeProgresoService.progressBarReactiva.next(true);
 
           console.log(err);
-          if(err.error.status == 400) {
-                this.openSnackBar(err.error.message);
+          if(err.error.status === 400 && err.error.message === "----Placa ya se encuentra registrada.") {
+                this.openSnackBar('La placa ya se encuentra registrada');
           } else if(err.error.status == 404) {
                 this.openSnackBar(err.error.message);
           } else if(err.error.status == 405) {

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VehiculoService } from './../../../_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agregar-vehiculo',
@@ -17,23 +18,22 @@ export class AgregarVehiculoComponent implements OnInit {
   selectedItem : string;
   selectedItemTV : string;
   positions = [
-    {value: 'Ford' },
+    {value: 'Toyota' },
     {value: 'Chevrolet'},
-    {value: 'Toyota'},
-    {value: 'Mazda'},
     {value: 'Renault'},
+    {value: 'Mazda'},
+    {value: 'Mercedes'},
+    {value: 'Alfa Romeo'},
     {value: 'Audi'},
-    {value: 'BMW'},
-    {value: 'Honda'},
-    {value: 'Jeep'},
-    {value: 'Nissan'},
-    {value: 'Suzuki'}
+    {value: 'Ferrari'},
+    {value: 'Peugeot'},
+    {value: 'Porche'}
   ];
 
   tipoVeh = [
-    {tipo: 'Deportivo'},
+    {tipo: 'Carro'},
     {tipo: 'Camioneta'},
-    {tipo: 'Automovil'},
+    {tipo: 'Furgon'},
     {tipo: 'Campero'}
   ]
 
@@ -47,7 +47,8 @@ export class AgregarVehiculoComponent implements OnInit {
   constructor(private serviceAgregarVehiculo: VehiculoService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -111,6 +112,14 @@ export class AgregarVehiculoComponent implements OnInit {
     }
   }
 
+  openSnackBar(mensaje: string) {
+    this.snackBar.open(mensaje, 'info', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+  }
+
   get modelo() {
     return this.Vehform.get('modelo');
   }
@@ -130,4 +139,6 @@ export class AgregarVehiculoComponent implements OnInit {
   get marca(){
     return this.Vehform.get('marca');
   }
+
+
 }
