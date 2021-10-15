@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Ciudad } from 'src/app/_model/Ciudad';
 import { Departamento } from 'src/app/_model/Departamento';
+import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 import { DepartamentoService } from 'src/app/_service/departamento.service';
 
 @Component({
@@ -19,13 +20,15 @@ export class DepartamentoComponent implements OnInit {
   @ViewChild("DepartmentPaginator") paginator: MatPaginator;
 
   constructor(private departamentoService: DepartamentoService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private barraProgresoService: BarraDeProgresoService) { }
 
   ngOnInit(): void {
-
+    this.barraProgresoService.progressBarReactiva.next(false);
     this.departamentoService.listar().subscribe(data =>{
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
+        this.barraProgresoService.progressBarReactiva.next(true);
     });
 
   }

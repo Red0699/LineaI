@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
+import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 
 @Component({
   selector: 'app-vehiculo',
@@ -25,7 +26,8 @@ export class VehiculoComponent implements OnInit {
   
   constructor(private vehiculoService: VehiculoService,
     private snackBar: MatSnackBar,
-    public route: ActivatedRoute) { }
+    public route: ActivatedRoute,
+    private barraProgresoService: BarraDeProgresoService) { }
 
 
 
@@ -71,10 +73,12 @@ export class VehiculoComponent implements OnInit {
   }
 
   listarVeh() {
+    this.barraProgresoService.progressBarReactiva.next(false);
     this.vehiculoService.listarV(this.pageIndex, this.pageSize).subscribe(data => {
       this.lengthPage = data.totalElements;
       this.dataSource = new MatTableDataSource(data.content);
       this.dataSource.sort = this.sort;
+      this.barraProgresoService.progressBarReactiva.next(true);
       
     });
   }

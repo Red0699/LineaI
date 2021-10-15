@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VehiculoService } from './../../../_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 
 @Component({
   selector: 'app-agregar-vehiculo',
@@ -48,13 +49,16 @@ export class AgregarVehiculoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private barraProgresoService: BarraDeProgresoService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
+      this.barraProgresoService.progressBarReactiva.next(false);
       this.idVehiculo = params['idVehiculo'];
       // si llega el id edicion es verdadera
       this.edicion = params['idVehiculo'] != null;
+      this.barraProgresoService.progressBarReactiva.next(true);
     });
 
     // Se comprueba el estado de edicion
@@ -79,12 +83,14 @@ export class AgregarVehiculoComponent implements OnInit {
   }
 
   cargar(){
+    this.barraProgresoService.progressBarReactiva.next(false);
     this.serviceAgregarVehiculo.listarIdVeh(this.idVehiculo).subscribe(data => {
       this.Vehform.get('placa').setValue(data.placa);
       this.Vehform.get('modelo').setValue(data.modelo);
       this.Vehform.get('marca').setValue(data.marca);
       this.Vehform.get('tipoVehiuclo').setValue(data.tipoVehiuclo);
       this.Vehform.get('capacidad').setValue(data.capacidad);
+      this.barraProgresoService.progressBarReactiva.next(true);
     });
   }
 
@@ -97,17 +103,21 @@ export class AgregarVehiculoComponent implements OnInit {
     vehiculo.capacidad = this.Vehform.value['capacidad'];
 
     if (this.edicion === true) {
-      //metodo para editar
+      //Editar
+      this.barraProgresoService.progressBarReactiva.next(false);
       vehiculo.idVehiculo = this.idVehiculo;
       this.serviceAgregarVehiculo.editar(vehiculo).subscribe(() => {
         this.Vehform.reset();
         this.router.navigate(['/vehiculo']);
+        this.barraProgresoService.progressBarReactiva.next(true);
       });
     } else {
-      // metodo de guardar
+      this.barraProgresoService.progressBarReactiva.next(false);
+      //Guardar
       this.serviceAgregarVehiculo.guardar(vehiculo).subscribe(() => {
         this.Vehform.reset();
         this.router.navigate(['/vehiculo']);
+        this.barraProgresoService.progressBarReactiva.next(true);
       });
     }
   }
