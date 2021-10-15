@@ -70,15 +70,16 @@ export class AgregarVehiculoComponent implements OnInit {
 
   formularioVacio(){
     this.Vehform = new FormGroup({
-      'placa': new FormControl('', [Validators.required]),
+      'placa': new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z]{3}[-]\d{3}/)]),
       'modelo': new FormControl(null, [
         Validators.required,
         Validators.min(1900),
-        Validators.max(2022)
+        Validators.max(2022),
+        Validators.pattern(/\d{4}/)
       ]),
       'marca': new FormControl('', [Validators.required]),
       'tipoVehiuclo': new FormControl('', [Validators.required]),
-      'capacidad': new FormControl('', [Validators.required]),
+      'capacidad': new FormControl('', [Validators.required,Validators.pattern(/\d{1,5}[kK][gG]/)])
     });
   }
 
