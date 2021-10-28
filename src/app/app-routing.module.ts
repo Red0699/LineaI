@@ -7,20 +7,23 @@ import { DepartamentoComponent } from './pages/departamento/departamento.compone
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
 import { AgregarVehiculoComponent } from '../app/pages/vehiculo/agregar-vehiculo/agregar-vehiculo.component';
-
+import { NotAllowedComponent } from './pages/not-allowed/not-allowed.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  {path: 'buscar', component: BuscarComponent},
+  {path: '', component: LoginComponent},
   {path: 'ingresar', component: RegistroComponent},
   {path: 'editar', component: EditarComponent},
   {path: 'departamento', component: DepartamentoComponent, children :[
        {path:  'ciudad/:idDep', component: CiudadComponent}
     ]
   },
+  {path: 'login', component: LoginComponent},
   {path: 'vehiculo', component: VehiculoComponent, children :[
         {path: 'agregarVehiculo', component: AgregarVehiculoComponent},
         {path: 'editar/:idVehiculo', component: AgregarVehiculoComponent}
   ]},
+  {path: 'nopermiso', component: NotAllowedComponent},
   {path: '**', component: BuscarComponent}
 ];
 
