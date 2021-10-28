@@ -1,25 +1,21 @@
-.crea
-{
-    width: 200px;
-    background-color: #24303c;
-    padding: 180px;
-    margin: auto;
+.container{
+    align-items: center;
+    justify-content: center;
+    width: 300px;
     margin-top: 100px;
-    border-radius: 4px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 18px 37px #000;
+    margin-left: 40%;
 }
 
-mat-card-header{
-    justify-content: center;
-    
-}
-
-mat-card-content{
-    justify-content: center;
-} 
-
-mat-form-field{
+.mat-form-field{
     width: 100%;
+    /*min-width: 300px;*/
+}
+
+mat-card-tittle, mat-card-content, mat-card-header{
+    /*display: flex;*/
+    justify-content: center;
+}
+
+button{
+    width: 100%;   
 }

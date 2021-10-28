@@ -1,24 +1,35 @@
-<div class="crea">
-  <mat-form-field>
-    <mat-label>Usuario</mat-label>
-    <input matInput placeholder="Usuario" [formControl]="usuario" />
-    <mat-error *ngIf="usuario.invalid && usuario.errors.required">Usuario requerido</mat-error>
-    <mat-error *ngIf="usuario.invalid && usuario.errors.minLength">Mínimo 3 caracteres </mat-error>
-    <mat-error *ngIf="usuario.invalid && usuario.errors.minLength">Máximo 7 caracteres </mat-error>
-    <mat-error *ngIf="usuario.invalid && usuario.errors.pattern">Solo se aceptan letras y números</mat-error>
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <mat-label>Contraseña</mat-label>
-    <input matInput placeholder="Contraseña" [formControl]="contrasena" type="password" />
-    <mat-error *ngIf="contrasena.invalid && contrasena.errors.required">Contraseña requerida</mat-error>
-    <mat-error *ngIf="contrasena.invalid && contrasena.errors.minLength">Mínimo 3 caracteres </mat-error>
-    <mat-error *ngIf="contrasena.invalid && contrasena.errors.minLength">Máximo 15 caracteres </mat-error>
-    <mat-error *ngIf="contrasena.invalid && contrasena.errors.pattern">Solo se aceptan letras y números</mat-error>
-  </mat-form-field>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <p>
 
-  <button mat-raised-button (click)="login()" color="accent" [disabled]="!usuario.valid && !contrasena.valid">
-    Ingresar
-  </button>
-
+          <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="usuario" [formControl]="usuario" />
+            <mat-error *ngIf="usuario.invalid && usuario.errors.required">Usuario requerido</mat-error>
+            <mat-error *ngIf="usuario.invalid && usuario.errors.minLength">Mínimo 3 caracteres </mat-error>
+            <mat-error *ngIf="usuario.invalid && usuario.errors.minLength">Máximo 7 caracteres </mat-error>
+            <mat-error *ngIf="usuario.invalid && usuario.errors.pattern">Solo se aceptan letras y números</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder="Contraseña" [formControl]="contrasena" type="password" />
+            <mat-error *ngIf="contrasena.invalid && contrasena.errors.required">Contraseña requerida</mat-error>
+            <mat-error *ngIf="contrasena.invalid && contrasena.errors.minLength">Mínimo 3 caracteres </mat-error>
+            <mat-error *ngIf="contrasena.invalid && contrasena.errors.minLength">Máximo 15 caracteres </mat-error>
+            <mat-error *ngIf="contrasena.invalid && contrasena.errors.pattern">Solo se aceptan letras y números
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <button mat-raised-button (click)="login()" color="primary"
+          [disabled]="!usuario.valid && !contrasena.valid">Ingresar </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
