@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-//import { LoaderService } from './loader/loader.service';
 import { BarraDeProgresoService } from './_service/barra-de-progreso.service';
 import { LoginService } from './_service/login.service';
+
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.barraDeProgresoService.progressBarReactiva.subscribe(data => {
-      // this.flacProgressBar = data;
       this.flagProgressBar = !this.flagProgressBar;
       this.isLoggedIn$ = this.loginService.isLoggedIn;
     });
