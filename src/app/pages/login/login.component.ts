@@ -54,7 +54,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.usuario.value, this.contrasena.value).subscribe(data => {
       sessionStorage.setItem(environment.TOKEN, data.access_token);
       this.router.navigate(['/vehiculo']);
+      this.loginService.toolBarReactiva.next(false);
     });
 
   }
+
+
+  
 }
