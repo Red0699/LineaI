@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BarraDeProgresoService } from '../_service/barra-de-progreso.service';
 import { environment } from './../../environments/environment';
+import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         }else if (err.status === 401 && err.error.error_description === "----Nick o password incorecto"){
           this.openSnackBar('Usuario o contraseña incorrecta');
           this.router.navigate(['/login']);
+
         }else if (err.error.status === 400 && err.error.message === "----Placa ya se encuentra registrada.") {
           this.openSnackBar('Placa ya se encuentra registrada');
           // 404, 405 y 415 redirigir a una pagina que diga ha ocurrido un error, comuniquese con el administrador
