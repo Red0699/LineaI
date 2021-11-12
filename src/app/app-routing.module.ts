@@ -25,7 +25,9 @@ const routes: Routes = [
   },
   // pagina no encontrada
   {path: 'login', component: LoginComponent},
-  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService]},
+  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService], children:[
+    //{path: 'agregarUsuario', component: AgregarUsuarioComponent, canActivate: [GuardianService] },
+  ]},
   {path: 'Error', component: NotOkComponent},
   {path: 'nopermiso', component: NotAllowedComponent},
   {path: '**', component: NotFoundComponent}
