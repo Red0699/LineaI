@@ -1,6 +1,7 @@
 import {Ciudad} from '../_model/Ciudad'
 
 export class Usuario{
+    idUsuario : number;
     documento: string;
     nombre: string;
     apellido: string;

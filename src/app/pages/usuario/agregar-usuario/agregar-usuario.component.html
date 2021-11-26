@@ -1,0 +1,86 @@
+<div class="crea">
+    <form [formGroup]="userform" #formVehiculo="ngForm" (ngSubmit)="guardarUsuario()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Documento</mat-label>
+            <input matInput placeholder="Documento" formControlName="documento" maxlength="10" type="number" />
+            <mat-error *ngIf="documento.invalid && documento.errors.required" placeholder="Placa">Documento requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="nombre" />
+            <mat-error *ngIf="nombre.invalid && nombre.errors.required">Nombre requerido</mat-error>
+            <mat-error *ngIf="nombre.invalid && nombre.errors.pattern">Apellido invalido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput placeholder="Apellido" formControlName="apellido" />
+            <mat-error *ngIf="apellido.invalid && apellido.errors.required">Apellido requerido</mat-error>
+            <mat-error *ngIf="apellido.invalid && apellido.errors.pattern">Apellido invalido</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Ingrese una contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="contraseña">
+            <mat-error *ngIf="contraseña.invalid && contraseña.errors.required">Contraseña requerida</mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Direccion</mat-label>
+            <input matInput placeholder="Direccion" formControlName="direccion" />
+            <mat-error *ngIf="direccion.invalid && direccion.errors.required">Direccion requerida</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Celular</mat-label>
+            <input matInput placeholder="Celular" formControlName="celular" maxlength="10" type="number" />
+            <mat-error *ngIf="celular.invalid && celular.errors.required">Celular requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="correo"/>
+            <mat-error *ngIf="correo.invalid && correo.errors.required">Correo requerido</mat-error>
+            <mat-error *ngIf="correo.invalid && correo.errors.pattern">Correo invalido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Departamento</mat-label>
+            <mat-select formControlName="departamento" [(value)]="idDepartamento" (selectionChange)="idDepar($event.value)">
+                <mat-option>None</mat-option>
+                <mat-option [value]="departamento.idDepartamento" *ngFor="let dep of dataDepartamento">
+                    {{dep.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="departamento.invalid && departamento.errors.required">Debe seleccionar una opcion</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Ciudad</mat-label>
+            <mat-select formControlName="ciudad">
+                <mat-option>None</mat-option>
+                <mat-option [value]="ciudad" *ngFor="let city of dataCiudad">
+                    {{city.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="ciudad.invalid && ciudad.errors.required">Debe seleccionar una opcion</mat-error>
+        </mat-form-field>
+
+        <button mat-fab color="accent" style="float: right" type="submit" [disabled]="formUsuario.invalid">
+            <mat-icon>save</mat-icon>
+        </button>
+
+        <button mat-fab color="accent" style="float: right" [routerLink]="['/usuario']">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </form>
+
+</div>

@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-export interface UserInfo{
+export interface UserInfo {
   content: Usuario[];
   pageable: {
     sort: {
@@ -43,8 +43,8 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  
-  public listarU(page: number, size:number): Observable<UserInfo>{
+
+  public listarU(page: number, size: number): Observable<UserInfo> {
     const rol = 4;
     let params = new HttpParams();
 
@@ -55,5 +55,21 @@ export class UsuarioService {
       catchError(err => throwError(err))
     );
   }
-  
+
+  listarUPorId(idUsuario: number) {
+    return this.http.get<Usuario>(`${this.url}/listar/${idUsuario}`);
+  }
+
+  public guardarUsuario(usuario: Usuario) {
+    return this.http.post(`${this.url}/guardar`, usuario);
+  }
+
+  public editarUsuario(usuario: Usuario) {
+    return this.http.put(`${this.url}/editar`, usuario);
+  }
+
+  public eliminarUsuario(idUsuario: number){
+    return this.http.delete(`${this.url}/eliminar/${idUsuario}`);
+  }
+
 }
