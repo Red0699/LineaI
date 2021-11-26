@@ -1,3 +1,5 @@
+import {Ciudad} from '../_model/Ciudad'
+
 export class Usuario{
     documento: string;
     nombre: string;
@@ -13,12 +15,5 @@ export class Usuario{
     rol: {
         idRol: number;
     };
-    ciudad: {
-        idCiudad: number;
-        nombre: string;
-        departamento: {
-            idDepartamento: number;
-            nombre: string;
-        }
-    };
+    ciudad: Ciudad;
 } 

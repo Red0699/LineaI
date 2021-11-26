@@ -30,26 +30,17 @@ export class UsuarioComponent implements OnInit {
     private barraProgresoService: BarraDeProgresoService) { }
 
   ngOnInit(): void {
-    this.cargarUsuarioInfo();
+    this.listarUsuario();
   }
 
-  private cargarUsuarioInfo(): void{
-    this.usuarioService.listarU(0, 3).pipe(
-      tap(data => console.log(data)),
-      map((uInfo: UserInfo) => this.info = uInfo)
-    ).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data.content);
-      this.dataSource.sort = this.sort;
-      // this.loader.progressBarReactiva.next(true);
-    });
-  }
 
   listarUsuario(){
-    this.usuarioService.listarU(this.pageIndex, this.pageSize).pipe(
-      map((uInfo: UserInfo) => this.info = uInfo)
-    ).subscribe(data => {
+    this.barraProgresoService.progressBarReactiva.next(false);
+    this.usuarioService.listarU(this.pageIndex, this.pageSize).subscribe(data => {
       this.dataSource = new MatTableDataSource(data.content);
       this.dataSource.sort = this.sort;
+      this.lengthPage = data.totalElements;
+      this.barraProgresoService.progressBarReactiva.next(true);
     });
   }
 
