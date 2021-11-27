@@ -8,9 +8,6 @@
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-        <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
         <!-- Documento -->
         <ng-container matColumnDef="documento">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento </th>
@@ -78,9 +75,13 @@
                     <mat-icon>edit</mat-icon>
                 </button>
 
+                <button mat-stroked-button (click)="abrirDialogo(usuario)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
             </mat-cell>
         </ng-container>
-        
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

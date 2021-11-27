@@ -6,6 +6,8 @@ import { Usuario } from 'src/app/_model/usuario';
 import { UsuarioService } from 'src/app/_service/usuario.service';
 import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoEliminarComponent } from './dialogo-eliminar/dialogo-eliminar.component';
 
 @Component({
   selector: 'app-usuario',
@@ -27,7 +29,8 @@ export class UsuarioComponent implements OnInit {
 
   constructor(public route: ActivatedRoute, 
     private usuarioService: UsuarioService,
-    private barraProgresoService: BarraDeProgresoService) { }
+    private barraProgresoService: BarraDeProgresoService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.listarUsuario();
@@ -35,7 +38,6 @@ export class UsuarioComponent implements OnInit {
       this.listarUsuario();
     }); 
   }
-
 
   listarUsuario(){
     this.barraProgresoService.progressBarReactiva.next(false);
@@ -56,5 +58,12 @@ export class UsuarioComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  abrirDialogo(usuario: Usuario){
+    const dialogRef = this.dialog.open(DialogoEliminarComponent, {
+      width: '450px',
+      data: {idUsuario: usuario.idUsuario, nombre: usuario.nombre, apellido: usuario.apellido}
+    });
   }
 }

@@ -1,0 +1,25 @@
+<p>¿Desea eliminar este Conductor?</p>
+<p>Nombre: {{ data.nombre }} {{data.apellido}} </p>
+<p>ID: {{ data.idUsuario }}</p>
+
+<div class="boton">
+  <button
+    mat-raised-button
+    class="cerrar"
+    style="float: right"
+    color="accent"
+    (click)="cerrarDialogo()"
+  >
+    Cancelar
+  </button>
+
+  <button
+    mat-raised-button
+    class="cerrar"
+    style="float: right"
+    color="accent"
+    (click)="eliminarUsuario(data.idUsuario)"
+  >
+    Eliminar
+  </button>
+</div>

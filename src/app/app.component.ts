@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { BarraDeProgresoService} from 'src/app/_service/barra-de-progreso.service'
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from './_service/login.service';
 import { GuardianService } from './_share/guardian.service';
 

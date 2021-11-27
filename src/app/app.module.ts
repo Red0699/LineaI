@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { AgregarUsuarioComponent } from './pages/usuario/agregar-usuario/agregar-usuario.component';
+import { DialogoEliminarComponent } from './pages/usuario/dialogo-eliminar/dialogo-eliminar.component';
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -44,7 +45,8 @@ export function tokenGetter() {
     NotAllowedComponent,
     UsuarioComponent,
     AgregarVehiculoComponent,
-    AgregarUsuarioComponent
+    AgregarUsuarioComponent,
+    DialogoEliminarComponent
   ],
   imports: [
     BrowserModule,
