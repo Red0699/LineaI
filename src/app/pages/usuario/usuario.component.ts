@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Usuario } from 'src/app/_model/usuario';
-import { UsuarioService, UserInfo } from 'src/app/_service/usuario.service';
+import { UsuarioService } from 'src/app/_service/usuario.service';
 import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 import { map, tap } from 'rxjs/operators';
 
@@ -21,9 +21,8 @@ export class UsuarioComponent implements OnInit {
   pageSize: number = 5;
   lengthPage: number;
 
-  displayedColumns: String[] = ['documento', 'nombre', 'apellido', 'nick', 'direccion','celular','correo','departamento','ciudad','rol']
+  displayedColumns: String[] = ['documento', 'nombre', 'apellido', 'nick', 'direccion','celular','correo','departamento','ciudad','rol','accion']
   dataSource = new MatTableDataSource<Usuario>([]);
-  info : UserInfo;
 
   constructor(public route: ActivatedRoute, 
     private usuarioService: UsuarioService,

@@ -41,7 +41,7 @@ export class AgregarUsuarioComponent implements OnInit {
     });
 
     this.formulario();
-    
+
     if (this.edicion === true) {
       this.cargarUsuarios();
     }
@@ -56,11 +56,10 @@ export class AgregarUsuarioComponent implements OnInit {
       'nombre': new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z ]{2,25}/)]),
       'apellido': new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z ]{2,25}/)]),
       'nick': new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z0-9]/)]),
-      'contraseña': new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z0-9]/)]),
+      'clave': new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z0-9]/)]),
       'direccion': new FormControl('', [Validators.required]),
       'celular': new FormControl('', [Validators.required, Validators.pattern(/[0-9]{7,10}/)]),
       'correo': new FormControl('',[Validators.required, , Validators.pattern(/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm)] ),
-      'departamento': new FormControl('', [Validators.required]),
       'ciudad': new FormControl('', [Validators.required])
     });
   }
@@ -78,7 +77,7 @@ export class AgregarUsuarioComponent implements OnInit {
       this.userForm.get('nombre').setValue(data.nombre);
       this.userForm.get('apellido').setValue(data.apellido);
       this.userForm.get('nick').setValue(data.nick);
-      this.userForm.get('clave').setValue(data.correo);
+      this.userForm.get('clave').setValue(data.clave);
       this.userForm.get('direccion').setValue(data.direccion);
       this.userForm.get('celular').setValue(data.celular);
       this.userForm.get('correo').setValue(data.correo);
@@ -103,8 +102,9 @@ export class AgregarUsuarioComponent implements OnInit {
       idRol: 4
     };
 
+    usuario.ciudad = this.userForm.value['ciudad']
+
     if (this.edicion === true) {
-      // console.log(usuario);
       usuario.idUsuario = this.idUser;
       this.usuarioService.editarUsuario(usuario).subscribe(() => {
         this.openSnackBarr('Editado correctamente');
@@ -112,7 +112,6 @@ export class AgregarUsuarioComponent implements OnInit {
         this.router.navigate(['/usuario']);
       });
     } else {
-      // console.log(usuario);
       this.usuarioService.guardarUsuario(usuario).subscribe(() => {
         this.userForm.reset();
         this.openSnackBarr('Se ha registrado correctamente');

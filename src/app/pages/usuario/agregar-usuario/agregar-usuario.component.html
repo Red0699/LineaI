@@ -1,5 +1,5 @@
 <div class="crea">
-    <form [formGroup]="userform" #formVehiculo="ngForm" (ngSubmit)="guardarUsuario()">
+    <form [formGroup]="userForm" #formVehiculo="ngForm" (ngSubmit)="guardarUsuario()">
         <mat-form-field class="example-full-width">
             <mat-label>Documento</mat-label>
             <input matInput placeholder="Documento" formControlName="documento" maxlength="10" type="number" />
@@ -21,11 +21,18 @@
             <mat-error *ngIf="apellido.invalid && apellido.errors.pattern">Apellido invalido</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+            <mat-label>Nick</mat-label>
+            <input matInput placeholder="Nickname" formControlName="nick" />
+            <mat-error *ngIf="nick.invalid && nick.errors.required">Nick requerido</mat-error>
+            <mat-error *ngIf="nick.invalid && nick.errors.pattern">Nick invalido</mat-error>
+        </mat-form-field>
+
 
         <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Ingrese una contraseña</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="contraseña">
-            <mat-error *ngIf="contraseña.invalid && contraseña.errors.required">Contraseña requerida</mat-error>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="clave">
+            <mat-error *ngIf="clave.invalid && clave.errors.required">Contraseña requerida</mat-error>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -55,26 +62,23 @@
         <mat-form-field class="example-full-width">
             <mat-label>Departamento</mat-label>
             <mat-select formControlName="departamento" [(value)]="idDepartamento" (selectionChange)="idDepar($event.value)">
-                <mat-option>None</mat-option>
-                <mat-option [value]="departamento.idDepartamento" *ngFor="let dep of dataDepartamento">
-                    {{dep.value}}
+                <mat-option [value]="departamento.idDepartamento" *ngFor="let departamento of dataSourceDepartamento">
+                    {{departamento.nombre}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="departamento.invalid && departamento.errors.required">Debe seleccionar una opcion</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-label>Ciudad</mat-label>
             <mat-select formControlName="ciudad">
-                <mat-option>None</mat-option>
-                <mat-option [value]="ciudad" *ngFor="let city of dataCiudad">
-                    {{city.value}}
+                <mat-option [value]="city" *ngFor="let city of dataSourceCiudad">
+                    {{city.nombre}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="ciudad.invalid && ciudad.errors.required">Debe seleccionar una opcion</mat-error>
         </mat-form-field>
 
-        <button mat-fab color="accent" style="float: right" type="submit" [disabled]="formUsuario.invalid">
+        <button mat-fab color="accent" style="float: right" type="submit" [disabled]="userForm.invalid">
             <mat-icon>save</mat-icon>
         </button>
 

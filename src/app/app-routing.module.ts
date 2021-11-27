@@ -10,6 +10,7 @@ import { NotAllowedComponent } from './pages/not-allowed/not-allowed.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { GuardianService } from './_share/guardian.service';
+import { AgregarUsuarioComponent } from './pages/usuario/agregar-usuario/agregar-usuario.component';
 
 
 const routes: Routes = [
@@ -23,11 +24,14 @@ const routes: Routes = [
     {path: 'editar/:idVehiculo', component: AgregarVehiculoComponent, canActivate: [GuardianService]}
   ], canActivate: [GuardianService]
   },
+  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService], children: [
+    {path: 'agregarUsuario', component: AgregarUsuarioComponent },
+    {path: 'editarUsuario/:id', component: AgregarUsuarioComponent}
+  ]},
+
+  
   // pagina no encontrada
   {path: 'login', component: LoginComponent},
-  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService], children:[
-    //{path: 'agregarUsuario', component: AgregarUsuarioComponent, canActivate: [GuardianService] },
-  ]},
   {path: 'Error', component: NotOkComponent},
   {path: 'nopermiso', component: NotAllowedComponent},
   {path: '**', component: NotFoundComponent}
