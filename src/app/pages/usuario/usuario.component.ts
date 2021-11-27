@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Usuario } from 'src/app/_model/usuario';
 import { UsuarioService } from 'src/app/_service/usuario.service';
 import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
-import { map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usuario',
@@ -24,12 +23,17 @@ export class UsuarioComponent implements OnInit {
   displayedColumns: String[] = ['documento', 'nombre', 'apellido', 'nick', 'direccion','celular','correo','departamento','ciudad','rol','accion']
   dataSource = new MatTableDataSource<Usuario>([]);
 
+  suscripcion: Subscription;
+
   constructor(public route: ActivatedRoute, 
     private usuarioService: UsuarioService,
     private barraProgresoService: BarraDeProgresoService) { }
 
   ngOnInit(): void {
     this.listarUsuario();
+    this.suscripcion = this.usuarioService.refresh.subscribe(() => {
+      this.listarUsuario();
+    }); 
   }
 
 

@@ -28,17 +28,12 @@
             <mat-error *ngIf="nick.invalid && nick.errors.pattern">Nick invalido</mat-error>
         </mat-form-field>
 
-
-        <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>Ingrese una contraseña</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="clave">
-            <mat-error *ngIf="clave.invalid && clave.errors.required">Contraseña requerida</mat-error>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+        <mat-form-field class="example-full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder="Nickname" formControlName="clave" />
+            <mat-error *ngIf="clave.invalid && clave.errors.required">Contraseña requerido</mat-error>
+            <mat-error *ngIf="clave.invalid && clave.errors.pattern">Contraseña invalido</mat-error>
         </mat-form-field>
-
 
         <mat-form-field class="example-full-width">
             <mat-label>Direccion</mat-label>

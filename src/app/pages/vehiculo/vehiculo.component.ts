@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vehiculo',
@@ -18,6 +19,8 @@ export class VehiculoComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 5;
   lengthPage: number;
+
+  suscripcion : Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -34,33 +37,9 @@ export class VehiculoComponent implements OnInit {
   ngOnInit(): void {
 
     this.listarVeh();
-
-    /*let vehiculo: Vehiculo = new Vehiculo();
-    vehiculo.idVehiculo = 5;
-    vehiculo.placa = "akm-147";
-    vehiculo.modelo = "2019";
-    vehiculo.marca = "Ford";
-    vehiculo.tipoVehiuclo = "Carga";
-    vehiculo.capacidad = "50Kg"; */
-
-
-
-    /*this.vehiculoService.guardar(vehiculo).subscribe(data =>{
-        console.log("Se registro vehiculo");
-    });*/
-    /*
-         this.vehiculoService.editar(vehiculo).subscribe(data =>{
-            console.log("Vehiculo editado correctamente");
-          }, err => {
-            if(err.error.status == 500) {
-              this.openSnackBar("Error inesperado, comuniquese con el administrador");
-            } else{
-              this.openSnackBar(err.error.message);
-            }
-            
-          });
-    */
-
+    this.suscripcion = this.vehiculoService.refresh.subscribe(() => {
+      this.listarVeh();
+    }); 
   }
 
 
