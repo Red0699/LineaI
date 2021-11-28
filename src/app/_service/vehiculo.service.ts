@@ -45,8 +45,8 @@ export class VehiculoService {
     return this.http.get<Vehiculo>(`${this.url}/listar/${id}`);
   }
 
-  asociarVehiculos(asociaciar: Asociacion) {​​
-    return this.http.post(`${this.url}/asociarcondcutor/${asociaciar.idUsuario}/${asociaciar.idVehiculo}`, asociaciar);
+  asociarVehiculos(asociar: Asociacion) {​​
+    return this.http.post(`${this.url}/asociarcondcutor/${asociar.idUsuario}/${asociar.idVehiculo}`, asociar);
   }​​
 
   desasociarVehiculo(desasociar: Asociacion){

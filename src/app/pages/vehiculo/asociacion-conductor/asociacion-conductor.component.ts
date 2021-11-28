@@ -59,7 +59,6 @@ export class AsociacionConductorComponent implements OnInit {
   }
 
   Asociar(){
-    console.log(this.idUsuario);
     let asociacion = new Asociacion();
     asociacion.idUsuario = this.idUsuario;
     asociacion.idVehiculo = this.data.idVehiculo;
