@@ -1,0 +1,59 @@
+
+
+<p>Placa de Vehículo: {{ data.placa }}</p>
+<table>
+  <div class="content">
+    <tr>
+      <td>
+        <mat-form-field class="content">
+          <mat-label>Conductores</mat-label>
+          <mat-select [(value)]="idUsuario" (selectionChange)="idUserSelect($event.value)">
+            <mat-option [value]="usuario.idUsuario" *ngFor="let usuario of dataSourceUsuarioSel">
+              {{ usuario.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <button mat-raised-button class="botonAs" color="accent" (click)="Asociar()">
+          Asociar
+        </button>
+      </td>
+    </tr>
+  </div>
+</table>
+<br />
+
+<div class="tabla_asociacion">
+  <table mat-table [dataSource]="dataSourceConductores" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nombre
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.apellido }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Apellido
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.nombre }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef> Desasociar </mat-header-cell>
+      <mat-cell *matCellDef="let usuario">
+        <button mat-stroked-button class="botonDes" color="accent" (click)="desasociar(usuario.idUsuario)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </table>
+</div>
+
+<mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 5]"></mat-paginator>
+
+<button mat-raised-button style="float: right" color="accent" (click)="cerrarDialogo()">
+  Cancelar
+</button>

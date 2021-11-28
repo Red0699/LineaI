@@ -48,6 +48,9 @@
                 <button mat-button color="primary" [routerLink]="['/vehiculo/editar/', element.idVehiculo]">
                     <mat-icon>edit</mat-icon>
                 </button>
+                <button mat-button color="accent" (click)="abrirDialogo(element)">
+                    <span class="material-icons"> checklist_rtl </span>
+                </button>
             </td>
         </ng-container>
 
@@ -60,8 +63,8 @@
     <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" [length]="lengthPage"
         (page)="cambiarPag($event)"></mat-paginator>
 
-        <br>
-        
+    <br>
+
     <button mat-fab mat-button color="primary" [routerLink]="['agregarVehiculo']">
         <mat-icon>add</mat-icon>
     </button>

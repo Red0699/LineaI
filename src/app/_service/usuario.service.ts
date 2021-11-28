@@ -55,4 +55,12 @@ export class UsuarioService {
     );
   }
 
+  asociados(idVehiculo: number){
+    return this.http.get<Usuario[]>(`${this.url}/listarConductorNoVehiculo/${idVehiculo}`);
+  }
+
+  noAsociados(idVehiculo: number){
+    return this.http.get<Usuario[]>(`${this.url}/listarConductorVehiculo/${idVehiculo}`);
+  }
+
 }

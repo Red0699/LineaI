@@ -1,0 +1,34 @@
+.tabla_asociacion {
+  width: 400px;
+}
+.mat-elevation-z8 {
+  width: 100%;
+}
+
+.cerrar {
+  color: black;
+  background: white;
+}
+.cerrar:hover {
+  background: black;
+  color: white;
+}
+
+p {
+  font-size: 25px;
+  font-weight: 400px;
+}
+.botonAs {
+  color: black;
+  background-color: #69f0ae;
+  margin-left: 50px;
+}
+
+.botonDes {
+  color: black;
+  background: red;
+}
+
+.content {
+  margin-left: 10%;
+}

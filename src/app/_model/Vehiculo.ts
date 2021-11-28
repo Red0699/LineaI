@@ -6,3 +6,7 @@ export class Vehiculo{
     tipoVehiuclo:     string;
     capacidad:     string;
 }
+
+
+
+

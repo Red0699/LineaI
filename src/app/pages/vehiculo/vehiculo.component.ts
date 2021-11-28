@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { BarraDeProgresoService } from 'src/app/_service/barra-de-progreso.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AsociacionConductorComponent } from './asociacion-conductor/asociacion-conductor.component';
 
 @Component({
   selector: 'app-vehiculo',
@@ -30,16 +32,21 @@ export class VehiculoComponent implements OnInit {
   constructor(private vehiculoService: VehiculoService,
     private snackBar: MatSnackBar,
     public route: ActivatedRoute,
-    private barraProgresoService: BarraDeProgresoService) { }
+    private barraProgresoService: BarraDeProgresoService,
+    private dialog : MatDialog ) { }
 
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     this.listarVeh();
     this.suscripcion = this.vehiculoService.refresh.subscribe(() => {
       this.listarVeh();
     }); 
+  }
+
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
   }
 
 
@@ -74,6 +81,14 @@ export class VehiculoComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  abrirDialogo(vehiculo: Vehiculo){
+    const dialogRef = this.dialog.open(AsociacionConductorComponent, {
+      width: '450px',
+      height: '450px',
+      data: {placa: vehiculo.placa, idVehiculo: vehiculo.idVehiculo}
+    });
   }
 
 }

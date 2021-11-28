@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Vehiculo } from '../_model/Vehiculo';
 import { tap } from 'rxjs/operators';
 import { Observable, throwError, Subject } from 'rxjs';
+import { Asociacion } from './../_model/Asociacion';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,12 @@ export class VehiculoService {
     return this.http.get<Vehiculo>(`${this.url}/listar/${id}`);
   }
 
+  asociarVehiculos(asociaciar: Asociacion) {​​
+    return this.http.post(`${this.url}/asociarcondcutor/${asociaciar.idUsuario}/${asociaciar.idVehiculo}`, asociaciar);
+  }​​
+
+  desasociarVehiculo(desasociar: Asociacion){
+    return this.http.post(`${this.url}/desasociarconductor/${desasociar.idUsuario}/${desasociar.idVehiculo}`, desasociar);
+  }
 
 }
