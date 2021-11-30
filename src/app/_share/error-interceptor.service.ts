@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BarraDeProgresoService } from '../_service/barra-de-progreso.service';
 import { environment } from './../../environments/environment';
-import { error } from '@angular/compiler/src/util';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           if (event.body && event.body.error === true && event.body.errorMessage) {
             throw new Error(event.body.errorMessage);
-          }/*else{
-            this.snackBar.open("EXITO", 'AVISO', { duration: 5000 });    
-        }*/
+          }
         }
       })).pipe(catchError((err) => {
 
@@ -39,10 +37,10 @@ export class ErrorInterceptorService implements HttpInterceptor {
         }else if (err.status === 401 && err.error.error_description === "----Nick o password incorecto"){
           this.openSnackBar('Usuario o contraseña incorrecta');
           this.router.navigate(['/login']);
-
         }else if (err.error.status === 400 && err.error.message === "----Placa ya se encuentra registrada.") {
-          this.openSnackBar('Placa ya se encuentra registrada');
-          // 404, 405 y 415 redirigir a una pagina que diga ha ocurrido un error, comuniquese con el administrador
+          this.openSnackBar('La placa ya se encuentra registrada');
+        }else if (err.error.status === 400 && err.error.message === "----Documento ya se encuentra registrado."){
+          this.openSnackBar('El documento ya se encuentra registrado');
         }else if (err.status == 401){
           this.router.navigate(['/nopermiso']);
         } else if (err.error.status == 404) {

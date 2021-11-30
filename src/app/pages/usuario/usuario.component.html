@@ -67,11 +67,11 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
             <td mat-cell *matCellDef="let element"> {{element.rol.nombre}} </td>
         </ng-container>
-
+        <!-- Botones -->
         <ng-container matColumnDef="accion">
             <mat-header-cell *matHeaderCellDef> Accion </mat-header-cell>
             <mat-cell *matCellDef="let usuario">
-                <button mat-button color="accent" [routerLink]="['/usuario/editarUsuario', usuario.idUsuario]">
+                <button mat-button color="primary" [routerLink]="['/usuario/editarUsuario', usuario.idUsuario]">
                     <mat-icon>edit</mat-icon>
                 </button>
 

@@ -25,8 +25,8 @@ const routes: Routes = [
   ], canActivate: [GuardianService]
   },
   {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService], children: [
-    {path: 'agregarUsuario', component: AgregarUsuarioComponent },
-    {path: 'editarUsuario/:id', component: AgregarUsuarioComponent}
+    {path: 'agregarUsuario', component: AgregarUsuarioComponent, canActivate: [GuardianService] },
+    {path: 'editarUsuario/:id', component: AgregarUsuarioComponent, canActivate: [GuardianService]}
   ]},
 
   

@@ -60,7 +60,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
+        tokenGetter,
         allowedDomains: ['159.223.107.103:8080'],
         disallowedRoutes: ['http://159.223.107.103:8080/movitapp-backend/oauth/token'],
       },
